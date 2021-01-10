@@ -36,9 +36,9 @@ namespace PointsApp
                 
                 foreach (var point in source)
                 {
-                    if (Math.Sqrt((Math.Pow((0 - point.coordinateX), 2)))
-                        + (Math.Pow((0 - point.coordinateY), 2)) > Math.Sqrt(
-                            ((Math.Pow((0 - tempPoint.coordinateX), 2))) + (Math.Pow((0 - tempPoint.coordinateY), 2))))
+                    if (Math.Abs((Math.Sqrt((Math.Pow((0 - point.coordinateX), 2)))
+                        + (Math.Pow((0 - point.coordinateY), 2)))) > Math.Abs((Math.Sqrt(
+                            ((Math.Pow((0 - tempPoint.coordinateX), 2))) + (Math.Pow((0 - tempPoint.coordinateY), 2))))))
                     {
                         tempPoint.id = point.id;
                         tempPoint.coordinateX = point.coordinateX;
