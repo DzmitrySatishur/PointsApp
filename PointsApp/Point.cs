@@ -2,9 +2,9 @@
 {
     class Point
     {
-        public int id { get; set; }
-        public int coordinateX { get; set; }
-        public int coordinateY { get; set; }
+        public long id { get; set; }
+        public long coordinateX { get; set; }
+        public long coordinateY { get; set; }
 
         public Point()
         {

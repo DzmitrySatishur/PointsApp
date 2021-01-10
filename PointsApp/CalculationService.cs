@@ -6,7 +6,7 @@ namespace PointsApp
 {
     class CalculationService : CalculationServiceBase, ICalculationService
     {
-        public bool GetResultOfIncorrectMultiply(int x, int y)
+        public bool GetResultOfIncorrectMultiply(long x, long y)
         {
             try
             {
@@ -16,7 +16,7 @@ namespace PointsApp
             catch (FormatException ex) { Console.WriteLine(ex); throw; }
         }
 
-        public bool GetResultOfIncorrectDivision(int x, int y)
+        public bool GetResultOfIncorrectDivision(long x, long y)
         {
             try
             {
@@ -27,24 +27,39 @@ namespace PointsApp
             catch (FormatException ex) { Console.WriteLine(ex); throw; }
         }
 
-        public Point GetPointMostDistantFromNull(List<Point> source)
+        public List<Point> GetPointMostDistantFromNull(List<Point> source)
         {
             try
             {
-                Point maxPoint = source.First();
+                List<Point> tempList = new List<Point>();
+                Point tempPoint = source.First();
+                
                 foreach (var point in source)
                 {
-                    if (point.coordinateX > maxPoint.coordinateX && point.coordinateY > maxPoint.coordinateY)
+                    if (Math.Sqrt((Math.Pow((0 - point.coordinateX), 2)))
+                        + (Math.Pow((0 - point.coordinateY), 2)) > Math.Sqrt(
+                            ((Math.Pow((0 - tempPoint.coordinateX), 2))) + (Math.Pow((0 - tempPoint.coordinateY), 2))))
                     {
-                        maxPoint.coordinateX = point.coordinateX;
-                        maxPoint.coordinateY = point.coordinateY;
+                        tempPoint.id = point.id;
+                        tempPoint.coordinateX = point.coordinateX;
+                        tempPoint.coordinateY = point.coordinateY;
                     }
                 }
-                return maxPoint;
+
+                foreach (var p in source)
+                {
+                    if (tempPoint.coordinateX == p.coordinateX && tempPoint.coordinateY == p.coordinateY)
+                    {
+                        tempList.Add(p);
+                    }
+                }
+                return tempList;
             }
             catch (ArgumentException ex) { Console.WriteLine(ex); throw; }
             catch (FormatException ex) { Console.WriteLine(ex); throw; }
             catch (InvalidOperationException ex) { Console.WriteLine(ex); throw; }
         }
+
+
     }
 }

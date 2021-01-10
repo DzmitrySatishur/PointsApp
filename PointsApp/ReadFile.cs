@@ -16,9 +16,9 @@ namespace PointsApp
                 var points = from p in xDocument.Element("points")?.Elements("point")
                              select new Point
                              {
-                                 id = Convert.ToInt32(p.Attribute("id")?.Value),
-                                 coordinateX = Convert.ToInt32(p.Element("X")?.Value),
-                                 coordinateY = Convert.ToInt32(p.Element("Y")?.Value)
+                                 id = Convert.ToInt64(p.Attribute("id")?.Value),
+                                 coordinateX = Convert.ToInt64(p.Element("X")?.Value),
+                                 coordinateY = Convert.ToInt64(p.Element("Y")?.Value)
                              };
                 return points.ToList();
             }

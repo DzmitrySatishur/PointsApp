@@ -25,7 +25,7 @@ namespace PointsApp
 
             if (result.Result.Any())
             {
-                Message?.Invoke(result.Result.Last().id);
+                Message?.Invoke((int)result.Result.Last().id);
             }
         }
     }

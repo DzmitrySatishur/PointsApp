@@ -2,7 +2,7 @@
 {
     interface ICalculationService
     {
-        bool GetResultOfIncorrectMultiply(int x, int y);
-        bool GetResultOfIncorrectDivision(int x, int y);
+        bool GetResultOfIncorrectMultiply(long x, long y);
+        bool GetResultOfIncorrectDivision(long x, long y);
     }
 }

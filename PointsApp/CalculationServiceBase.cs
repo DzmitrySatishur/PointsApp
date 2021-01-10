@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 
 namespace PointsApp
 {
     class CalculationServiceBase
     {
-        public bool CheckNegtativePoint(List<Point> source)
+        public List<Point> GetNegativePoints(List<Point> source)
         {
             try
             {
-                return source.Any(p => p.coordinateX < 0 || p.coordinateY < 0);
+                return (List<Point>) source.Where(p => p.coordinateX < 0 || p.coordinateY < 0).ToList();
             }
             catch (ArgumentException ex) { Console.WriteLine(ex); throw; }
             catch (FormatException ex) { Console.WriteLine(ex); throw; }

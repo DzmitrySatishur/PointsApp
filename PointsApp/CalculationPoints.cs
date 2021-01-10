@@ -21,12 +21,10 @@ namespace PointsApp
                 string filePath = @"D:\points.xml";
                 ReadFile readFile = new ReadFile();
                 var points = readFile.GetListFromFile(filePath);
-                var tempPoints = calculationServiceBase.SkipPointsInList(points).ToList();
-                if (!calculationServiceBase.CheckNegtativePoint(tempPoints))
-                {
-                    Console.WriteLine("Not one negative coordinates");
-                }
-                foreach (var p in tempPoints)
+                var pointsWithSkips = calculationServiceBase.SkipPointsInList(points).ToList();
+                
+                var negativePoints = calculationServiceBase.GetNegativePoints(pointsWithSkips);
+                foreach (var p in negativePoints)
                 {
                     if (calculationService.GetResultOfIncorrectMultiply(p.coordinateX, p.coordinateY))
                     {
@@ -41,7 +39,7 @@ namespace PointsApp
                     Console.WriteLine($"ID = {p.id}: X = {p.coordinateX}, Y = {p.coordinateY};");
                 }
 
-                var mostDistantPoint = calculationService.GetPointMostDistantFromNull(tempPoints);
+                var mostDistantPoint = calculationService.GetPointMostDistantFromNull(negativePoints);
                 WriteFile writeFile = new WriteFile();
                 writeFile.WriteToTextFile(pointsList.Count(), mostDistantPoint);
                 return pointsList;
