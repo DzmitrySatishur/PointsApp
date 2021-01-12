@@ -1,8 +1,9 @@
-﻿namespace PointsApp
+﻿using System.Collections.Generic;
+
+namespace PointsApp
 {
     interface ICalculationService
     {
-        bool GetResultOfIncorrectMultiply(long x, long y);
-        bool GetResultOfIncorrectDivision(long x, long y);
+        IEnumerable<Point> Filter(IEnumerable<Point> source);
     }
 }

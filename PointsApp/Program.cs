@@ -12,9 +12,9 @@ namespace PointsApp
         public static event ProcessFinished Message;
         static void Main(string[] args)
         {
-            ProcessMonitor processMonitor = new ProcessMonitor();
+            var processMonitor = new ProcessMonitor();
             Message += processMonitor.GetNoticeForEvent;
-            CalculationPoints parseFile = new CalculationPoints();
+            var parseFile = new CalculationPoints();
             var result = parseFile.RunTaskForCalculation();
 
             while (!result.IsCompleted)

@@ -10,37 +10,24 @@ namespace PointsApp
     {
         public Task<List<Point>> RunTaskForCalculation()
         {
+            const string filePath = @"D:\points.xml";
             return
             Task.Run(() =>
             {
                 Thread.Sleep(2000); //FOR ILLUSTRATION
-                CalculationServiceBase calculationServiceBase = new CalculationServiceBase();
-                CalculationService calculationService = new CalculationService();
-                List<Point> pointsList = new List<Point>();
-                Point point = new Point();
-                string filePath = @"D:\points.xml";
-                ReadFile readFile = new ReadFile();
+                var calculationService = new CalculationService();
+                var pointsList = new List<Point>();
+                var readFile = new ReadFile();
                 var points = readFile.GetListFromFile(filePath);
-                var pointsWithSkips = calculationServiceBase.SkipPointsInList(points).ToList();
-                
-                var negativePoints = calculationServiceBase.GetNegativePoints(pointsWithSkips);
-                foreach (var p in negativePoints)
+                var filterPoints = calculationService.Filter(points).ToList();
+                foreach (var p in filterPoints)
                 {
-                    if (calculationService.GetResultOfIncorrectMultiply(p.coordinateX, p.coordinateY))
-                    {
-                        continue;
-                    }
-
-                    if (calculationService.GetResultOfIncorrectDivision(p.coordinateX, p.coordinateY))
-                    {
-                        continue;
-                    }
                     pointsList.Add(p);
                     Console.WriteLine($"ID = {p.id}: X = {p.coordinateX}, Y = {p.coordinateY};");
                 }
 
-                var mostDistantPoint = calculationService.GetPointMostDistantFromNull(negativePoints);
-                WriteFile writeFile = new WriteFile();
+                var mostDistantPoint = calculationService.GetPointMostDistantFromNull(filterPoints).ToList();
+                var writeFile = new WriteFile();
                 writeFile.WriteToTextFile(pointsList.Count(), mostDistantPoint);
                 return pointsList;
             });
